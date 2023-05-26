@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Mapperとxmlのマッピング -->
+<mapper namespace="com.example.repository.SpringMySQLSampleMapper">	
+	<!-- マッピング定義(M_USER) -->
+	<resultMap type="com.example.model.MUser" id="muser">
+		<id column="user_name" property="username" />
+		<result column="password" property="password" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="mail_address" property="mailAddress" />
+		<result column="address" property="address" />
+		<result column="age" property="age" />
+		<result column="gender" property="gender" />
+		<result column="account_icon" property="accountIcon" />
+		<result column="auth" property="auth" />
+		<result column="version" property="version" />
+		<result column="create_date" property="createDate" />
+	</resultMap>
+
+	<!-- ユーザー1件の登録 -->
+	<insert id="insertOne">
+		INSERT INTO M_USER(
+			USER_NAME,
+			PASSWORD,
+			PHONE_NUMBER,
+			MAIL_ADDRESS,
+			ADDRESS,
+			AGE,
+			GENDER,
+			ACCOUNT_ICON,
+			AUTH,
+			VERSION
+			CREATE_DATE
+			)
+			VALUES(
+				#{username},
+				#{password},
+				#{phoneNumber},
+				#{mailAddress},
+				#{address, jdbcType=VARCHAR}, 
+				#{age, jdbcType=INTEGER},
+				#{gender, jdbcType=INTEGER},
+				#{accountIcon, jdbcType=VARCHAR},
+				#{auth},
+				#{version}
+				#{createDate}
+			)
+	</insert>
+	
+	<select id="findAllUser" resultType="MUSER">
+		SELECT * FROM M_USER ORDER BY CREATE_DATE;
+	</select>
+	
+	<!-- ログインユーザー情報取得 -->
+	<select id="findLoginUser" resultMap="muser">
+		SELECT * FROM M_USER WHERE USER_NAME = #{username}
+	</select>
+</mapper>

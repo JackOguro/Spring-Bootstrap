@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8" th:remove="tag">
+</head>
+<body>
+
+	<!-- ヘッダーの表示 -->
+	<div layout:fragment="header" th:replace="~{layout/header :: header}"></div>
+
+	<!-- サイドバーの表示 -->
+	<div layout:fragment="sidebar">
+		<div th:replace="~{layout/sidebar :: sidebar}"></div>
+	</div>
+
+	<!-- コンテンツの表示 -->
+	<main layout:fragment="content"
+		class="offcanvas-outside bg-light position-relative">
+		<div class="container-fluid">
+			<!-- トグルボタン -->
+			<div th:replace="~{layout/sidebar :: toggler}"></div>
+			<div class="row">
+				<!-- メッセージリスト -->
+				<div th:replace="~{fragments/messageList :: messageList}"></div>
+				<div class="col-4">
+					<div class="card shadow position-relative">
+						<svg class="bd-placeholder-img card-img-top" width="100%" height="350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+							<title>Placeholder</title>
+							<rect width="100%" height="100%" fill="#55595c"></rect>
+						</svg>
+						<div class="bg-primary rounded-circle position-absolute start-50 translate-middle" style="width:30%; top:350px">
+							<img src="/img/default.png" class="rounded-circle" width="100%" height="100%">
+						</div>
+						<div class="card-body">
+							<div class="d-flex align-items-center justify-content-between" style="margin-top:15%">
+								<h1>ユーザ名</h1>
+								<button>Edit profile</button>
+							</div>
+							<p class="card-text my-4">
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+								ああああああああああああああああああああああああああああああ
+							</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+					    			<button type="button" class="btn btn-sm btn-outline-secondary">Posts</button>
+					    			<button type="button" class="btn btn-sm btn-outline-secondary">Posts & replis</button>
+					    			<button type="button" class="btn btn-sm btn-outline-secondary">media</button>
+					    			<button type="button" class="btn btn-sm btn-outline-secondary">Likes</button>
+								</div>
+							</div>
+		            	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8" th:remove="tag">
+<title>ログイン画面</title>
+</head>
+<body>
+	<main layout:fragment="content">
+		<!-- container:576pxより小さいとき100％表示 -->
+		<div class="container">
+			<div class="text-center position-absolute start-50 translate-middle" style="top:25%">
+				<img th:src="@{img/title.png}" style="width:35%">
+			</div>
+			<!-- 画面中央に配置 -->
+			<div class="row vh-100 align-items-center justify-content-center">
+				<!-- card:枠線を付けることができる -->
+				<div class="card shadow" style="max-width: 480px">
+					<div class="card-body">
+						<h1 class="card-title mb-3 text-center text-navy">ログイン</h1>
+						<!-- layout:replaceの中にth:replaceを入れる？ -->
+						<div th:replace="~{fragments/message::login}"></div>
+						<form method="post" th:action="@{/login}">
+							<!-- ユーザーID -->
+							<div class="input-frame mb-3 d-flex align-items-center border">
+								<span class="fa-solid fa-id-card px-2"></span>
+								<input type="text" name="userId" class="login-input border-0 w-100" placeholder="ユーザー名">
+							</div>
+							<!-- パスワード -->
+							<div class="input-frame mb-3 d-flex align-items-center border">
+								<span class="fa-solid fa-key px-2"></span>
+								<input type="text" id="textPassword" class="login-input border-0 w-100" placeholder="パスワード">
+								<span id="buttonEye" class="fa-solid fa-eye px-2" onclick="pushHideButton()"></span>
+							</div>
+							<!-- ログインしたままにするかチェック -->
+							<div class="form-check mb-3">
+								<input class="form-check-input" type="checkbox" id="remember-me" name="remember-me">
+								<label for="remember-me" class="form-check-label">ログインしたままにする</label>
+							</div>
+							<button class="w-100 btn btn-primary" type="submit">ログイン</button>
+						</form>
+						<hr>
+						<div class="text-center">
+							<a th:href="@{/signup}" class="text-navy">新規登録画面へ</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

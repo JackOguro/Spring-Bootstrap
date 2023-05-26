@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8" th:remove="tag">
+</head>
+<body>
+	<!-- コンテンツの表示 -->
+	<main layout:fragment="content" class="vh-100">
+		<div class="container pt-4">
+			<!-- 左右中央に配置 -->
+			<div class="row justify-content-center">
+				<div class="card shadow" style="max-width: 480px">
+					<div class="card-body">
+						<h1 class="card-title mb-3 text-center">新規登録</h1>
+						<!-- 郵便番号から住所を自動入力するためにclassタグにh-adrを指定する -->
+						<form id="signup-form" method="post" th:action="@{/signup}" th:object=${signupForm} class="form-signup h-adr" enctype="multipart/form-data">
+							<!-- 郵便番号から住所を自動入力するために必要 -->
+							<span class="p-country-name" style="display:none;">Japan</span>
+							<!-- ユーザー名 -->
+							<div class="form-group mb-3">
+								<span class="badge bg-danger fs-6">必須</span>
+								<label for="username" class="form-label" th:text="#{username}"></label>
+								<input type="text" class="form-control" th:field="*{username}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{username}"></div>
+							</div>
+							<!-- 電話番号 -->
+							<div class="form-group mb-3">
+								<span class="badge bg-danger fs-6">必須</span> 
+								<label for="tel" class="form-label" th:text="#{phoneNumber}"></label> 
+								<input type="tel" class="form-control" th:field="*{phoneNumber}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{phoneNumber}"></div>
+							</div>
+							<!-- メールアドレス -->
+							<div class="form-group mb-3">
+								<span class="badge bg-danger fs-6">必須</span> 
+								<label for="username" class="form-label" th:text="#{mailAddress}"></label>
+								<input type="text" class="form-control" th:field="*{mailAddress}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{mailAddress}"></div>
+							</div>
+							<!-- 郵便番号(住所自動入力) -->
+							<div class="form-group mb-3">
+								<label for="post" class="form-label" th:text="#{postalNumber}" style="display:block"></label> 
+								<input type="text" class="form-control p-postal-code" size="3" maxlength="3" style="width:30%; display:inline-block">
+								-
+								<input type="text" class="form-control p-postal-code" size="4" maxlength="4" style="width:30%; display:inline-block">
+							</div>
+							<!-- 住所(都道府県＋市町村) -->
+							<div class="form-group mb-3">
+								<label for="address" class="form-label" th:text="#{address}"></label> 
+								<input type="text" class="form-control p-region p-locality p-street-address" th:field="*{address1}">
+							</div>
+							<!-- 住所(それ以降の住所) -->
+							<div class="form-group mb-3">
+								<label for="address" class="form-label" th:text="#{address} + （それ以降の住所）"></label> 
+								<input type="text" class="form-control" th:field="*{address2}">
+							</div>
+							<!-- 年齢-->
+							<div class="form-group mb-3">
+								<label for="age" class="form-label" th:text="#{age}"></label> 
+								<input type="text" class="form-control" th:field="*{age}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{age}"></div>
+							</div>
+							<!-- 性別 -->
+							<div class="form-group mb-3">
+								<label for="gender" class="form-label" th:text="#{gender}"></label> 
+								<div class="ms-2 form-check" th:each="gender:${T(com.example.util.Type).GENDERS}">
+									<input class="form-check-input" type="radio" th:field="*{gender}" th:value="${gender.key}">
+									<label class="form-check-label" th:for="${#ids.prev('gender')}" th:text="${gender.value}"></label>
+								</div>
+							</div>
+							<!-- アカウント画像 -->
+							<div class="form-group mb-3">
+								<label for="formFile" class="form-label" th:text="#{accountIcon}"></label> 
+								<input type="file" class="form-control" th:field="*{accountIcon}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{accountIcon}"></div>
+							</div>
+							<!-- パスワード -->
+							<div class="form-group mb-3">
+								<span class="badge bg-danger fs-6">必須</span> 
+								<label for="password" class="form-label" th:text="#{password}"></label> 
+								<input type="password" class="form-control" th:field="*{password}" th:errorclass="is-invalid">
+								<div class="invalid-feedback" th:errors="*{password}"></div>
+							</div>
+							<!-- パスワード確認用 -->
+							<div class="form-group mb-3">
+								<span class="badge bg-danger fs-6">必須</span> 
+								<label for="password" class="form-label" th:text="#{password} + （確認用）"></label> 
+								<input type="password" class="form-control" th:field="*{password2}" th:errorclass="is-invalid">
+								<div th:if="${#fields.hasErrors('check')}" class="invalid-feedback" th:errors="*{check}"></div>
+							</div>
+							<!-- 登録ボタン -->
+							<button type="submit" class="btn btn-primary w-100">登録</button>
+							<hr>
+						</form>
+						<a th:href="@{/login}" class="text-center d-block">ログイン画面に戻ります</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

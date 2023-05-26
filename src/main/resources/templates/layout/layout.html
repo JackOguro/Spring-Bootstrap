@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.css">
+<link rel="stylesheet" th:href="@{/css/layout.css}">
+<!-- DataTablesのCSSを追加 -->
+<link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap5.min.css}">
+<link rel="stylesheet" th:href="@{/webjars/datatables-buttons/css/buttons.dataTables.min.css}">
+<title>テストプログラム</title>
+</head>
+<body>
+
+	<!-- ヘッダーの配置 -->
+	<div layout:fragment="header"></div>
+	
+	<!-- サイドバーの配置 -->
+	<div layout:fragment="sidebar"></div>
+
+	<!-- コンテンツの配置 -->
+	<div layout:fragment="content" style="top:100px "></div>
+	
+</body>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{https://yubinbango.github.io/yubinbango/yubinbango.js}" charset="UTF-8"></script>
+<script th:src="@{/js/changeIcon.js}"></script>
+<!-- DataTablesのJSを追加 -->
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/webjars/datatables/js/dataTables.bootstrap5.min.js}"></script>
+<script th:src="@{/webjars/datatables-buttons/js/dataTables.buttons.min.js}"></script>
+<script th:src="@{/webjars/datatables-buttons/js/buttons.html5.min.js}"></script>
+<script th:src="@{/webjars/datatables-buttons/js/buttons.print.min.js}"></script>
+<script th:src="@{/webjars/jszip/jszip.min.js}"></script></body>
+<script th:src="@{/js/usertables.js}"></script>
+</html>

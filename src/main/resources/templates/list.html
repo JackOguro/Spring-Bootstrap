@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+<head>
+<meta charset="UTF-8" th:remove="tag">
+</head>
+<body>
+	<!-- ヘッダーの表示 -->
+	<div layout:fragment="header" th:replace="~{layout/header :: header}"></div>
+
+	<!-- サイドバーの表示 -->
+	<div layout:fragment="sidebar" th:replace="~{layout/sidebar::sidebar}"></div>
+	
+	<!-- コンテンツの表示 -->
+	<main layout:fragment="content" class="offcanvas-outside bg-light position-relative">
+		<div class="container-fluid">
+			<!-- トグルボタン -->
+			<div th:replace="~{layout/sidebar::toggler}"></div>
+			<div class="row">
+				<div class="col">
+					<div class="card shadow">
+						<div class="card-header">
+							<h6 class="text-navy my-2">ユーザ一覧</h6>
+						</div>
+						<div class="card-body table-responsive">
+							<table id="user-table" class="table table-bordered">
+								<thead>
+									<tr class="text-center">
+										<th>ユーザー名</th>
+										<th>電話番号</th>
+										<th>メールアドレス</th>
+										<th>住所</th>
+										<th>年齢</th>
+										<th>性別</th>
+										<th>権限</th>
+										<th>アカウント作成日時</th>
+										<th>詳細</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="user : ${userList}" th:object="${user}">
+										<td th:text="*{username}"></td>
+										<td th:text="*{phoneNumber}"></td>
+										<td th:text="*{mailAddress}"></td>
+										<td th:text="*{address}"></td>
+										<td th:text="*{age}"></td>
+										<td th:text="${T(com.example.util.Type).GENDERS.get(user.gender)}"></td>
+										<td th:text="*{auth}"></td>
+										<td th:text="${#dates.format(user.createDate, 'YYYY/MM/dd HH:MM:SS')}"></td>
+										<td>
+											<a th:href="@{/}">詳細</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>
